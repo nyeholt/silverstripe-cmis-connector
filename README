@@ -1,0 +1,113 @@
+###############################################
+Alfresco Connector Module
+###############################################
+
+Maintainer Contact
+-----------------------------------------------
+Marcus Nyeholt
+<marcus (at) silverstripe (dot) com (dot) au>
+
+Requirements
+-----------------------------------------------
+SilverStripe 2.4.x
+External Content module
+Alfresco > 3.0 (community or enterprise)
+
+Documentation
+-----------------------------------------------
+Ensure that you have the external-content module installed. 
+
+Place the alfresco-connector module in your SS root directory and run
+/dev/build.
+
+See http://doc.silverstripe.org/doku.php?id=module:alfresco-connector for 
+getting started with the connector module
+
+Licensing
+-----------------------------------------------
+This connector is licensed under the BSD 
+
+Alfresco community is licensed under the GPL, however no Alfresco libraries
+are used when connecting to Alfresco
+
+
+Quick Usage Overview
+-----------------------------------------------
+
+* Browse to http://localhost/external-content/admin and login
+* Create a new AlfrescoContentSource from the tree on the left menu. Set the 
+following field values:
+** name - Alfresco Content
+** API Url - The top level URL of your alfresco instance's webscript API. Typically
+this is something like http://localhost:8080/alfresco/api/s (there's a publically
+accessible Alfresco demo install at http://joomla.demo.alfresco.com/alfresco/s).
+** Username - The alfresco instance's username (the public demo system is 'demo')
+** Password - The alfresco instance's password (the public demo system is 'demo')
+** Root Path - Leave as blank
+* Once saved, you will need to reload the External Content page for content to 
+start coming through
+
+Be aware that the username and password provided should be a generic 'read-only'
+user of the system. Per-user access is on the TODO list.  
+
+== Accessing content on the frontend ==
+
+* Navigate to the "Site Content" tab
+* Create a new 'External Content Page' in your site tree
+* Change the External Content Source value to the Alfresco Content source created 
+earlier
+* Save and view the page on the frontend; its url should look something like
+http://path.to.silverstripe/extcon/view?ID=1 or similar
+* You can also link to external content directly in the WYSIWYG content areas by
+selecting "External Content" as the "Link To" option when the Insert Link toolbar
+is displayed
+
+== Importing content == 
+
+* First, make sure you have an empty folder called "Incoming" created in the 
+"Files & Images" section
+* Navigate back to the External Content section, and expand the "Alfresco Content" 
+node created earlier. 
+* Navigate to a folder (eg Data Dictionary/Scripts) and click on its name, then 
+click on the Migrate tab.
+* Select the "Incoming" folder, then click the "Include Selected Item in Migration" 
+option.
+* Click the Migrate button down the bottom. An alert box will shortly appear when
+the migrate is complete. 
+* Navigate to the "Files and Images" section and click the "Incoming" folder. 
+
+API
+-----------------------------------------------
+
+There is no specific API available for working with content from Alfresco 
+as yet. 
+
+SeaMist
+
+SeaMist is an early stage PHP library for working with CMIS repositories over
+via Atom format. It is currently in its early infancy, but provides enough
+functionality for the Alfresco Connector module to work. Over time, it is hoped
+that other SeaMistRepository implementations will be created that mean client
+code can simply use the SeaMist library for interacting with CMIS repositories
+(which will then mean that this Alfresco Connector instead becomes a 
+CMIS connector).
+
+See the 'SeaMistRepository' interface to see where the API is currently at; 
+further work will be done to flesh out this functionality over time, and 
+this library may be spun off into a separate project.     
+
+Troubleshooting
+-----------------------------------------------
+
+The main problems that arise with this module are to do with the connection
+through to Alfresco. Make sure that
+
+* The URL to connect to alfresco is correct, including the port and URL path
+to the 'api' layer. 
+* The user and password entered is valid for being able to view the
+Company Home space within Alfresco. 
+* The system you are trying to connect to is actually viewable from the server
+that SilverStripe is running on. Test this by trying a command like
+	wget http://alfrescoserver:8080/alfresco/s/api/login?u=user&pw=pass
+* Check your PHP error log for any additional information
+

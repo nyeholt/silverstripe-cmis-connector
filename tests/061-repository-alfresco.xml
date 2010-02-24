@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901" xmlns:alf="http://www.alfresco.org">
+  <workspace cmis:repositoryRelationship="self">
+    <atom:title>Main Repository</atom:title>
+
+    <cmis:repositoryInfo> 
+      <cmis:repositoryId>c5b64d9e-465d-4385-a013-e5d99e8c39b4</cmis:repositoryId>
+      <cmis:repositoryName>Main Repository</cmis:repositoryName>
+      <cmis:repositoryRelationship>self</cmis:repositoryRelationship>
+      <cmis:repositoryDescription></cmis:repositoryDescription>   
+      <cmis:vendorName>Alfresco</cmis:vendorName> 
+      <cmis:productName>Alfresco Repository (Community)</cmis:productName>
+      <cmis:productVersion>3.2.0 (r 2384)</cmis:productVersion>
+      <cmis:rootFolderId>http://localhost:8080/alfresco/s/api/path/workspace/SpacesStore/Company%20Home</cmis:rootFolderId> 
+      <cmis:capabilities>
+        <cmis:capabilityMultifiling>true</cmis:capabilityMultifiling>
+        <cmis:capabilityUnfiling>false</cmis:capabilityUnfiling>
+        <cmis:capabilityVersionSpecificFiling>false</cmis:capabilityVersionSpecificFiling>        
+        <cmis:capabilityPWCUpdateable>true</cmis:capabilityPWCUpdateable>
+        <cmis:capabilityPWCSearchable>true</cmis:capabilityPWCSearchable>
+        <cmis:capabilityAllVersionsSearchable>false</cmis:capabilityAllVersionsSearchable>
+        <cmis:capabilityQuery>bothcombined</cmis:capabilityQuery>
+        <cmis:capabilityJoin>none</cmis:capabilityJoin>
+        <cmis:capabilityChanges>none</cmis:capabilityChanges>
+        <cmis:changesIncomplete>false</cmis:changesIncomplete>
+        <cmis:capabilityACL>none</cmis:capabilityACL>
+      </cmis:capabilities> 
+      <cmis:cmisVersionSupported>0.61</cmis:cmisVersionSupported>
+      <cmis:repositorySpecificInformation></cmis:repositorySpecificInformation>
+    </cmis:repositoryInfo>
+
+    <collection href="http://localhost:8080/alfresco/s/api/path/workspace/SpacesStore/Company%20Home/children" cmis:collectionType="rootchildren"> 
+      <atom:title>root collection</atom:title> 
+    </collection> 
+    <collection href="http://localhost:8080/alfresco/s/api/path/workspace/SpacesStore/Company%20Home/descendants" cmis:collectionType="rootdescendants"> 
+      <atom:title>root collection</atom:title> 
+    </collection> 
+    <collection href="http://localhost:8080/alfresco/s/api/checkedout" cmis:collectionType="checkedout"> 
+      <atom:title>checkedout collection</atom:title> 
+      <accept>application/atom+xml;type=entry</accept>
+    </collection> 
+    <collection href="http://localhost:8080/alfresco/s/api/unfiled" cmis:collectionType="unfiled"> 
+      <atom:title>unfiled collection</atom:title> 
+      <accept>application/atom+xml;type=entry</accept>
+    </collection>
+    <collection href="http://localhost:8080/alfresco/s/api/types" cmis:collectionType="typeschildren"> 
+      <atom:title>type collection</atom:title> 
+    </collection>
+    <collection href="http://localhost:8080/alfresco/s/api/types" cmis:collectionType="typesdescendants"> 
+      <atom:title>type collection</atom:title> 
+    </collection> 
+    <collection href="http://localhost:8080/alfresco/s/api/query" cmis:collectionType="query"> 
+      <atom:title>query collection</atom:title> 
+      <accept>application/cmisquery+xml</accept>
+    </collection>
+  </workspace> 
+</service> 

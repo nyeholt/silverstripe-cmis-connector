@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901">
+ <workspace cmis:repositoryRelationship="self">
+  <atom:title>KnowledgeTree DMS</atom:title>
+  <cmis:repositoryInfo>
+   <cmis:repositoryId>0ad7de04-7914-41b1-b5ee-be9f0b626437</cmis:repositoryId>
+   <cmis:repositoryName>KnowledgeTree DMS</cmis:repositoryName>
+   <cmis:repositoryRelationship>self</cmis:repositoryRelationship>
+
+   <cmis:repositoryDescription>KnowledgeTree Repository</cmis:repositoryDescription>
+   <cmis:vendorName>KnowledgeTree</cmis:vendorName>
+   <cmis:productName>KnowledgeTree Document Management System</cmis:productName>
+   <cmis:productVersion>3.6.2</cmis:productVersion>
+   <cmis:rootFolderId>http://kt.localhost/webservice/atompub/cmis/?dms/folder/Root%20Folder</cmis:rootFolderId>
+   <cmis:capabilities>
+
+    <cmis:capabilityMultifiling>false</cmis:capabilityMultifiling>
+    <cmis:capabilityUnfiling>false</cmis:capabilityUnfiling>
+    <cmis:capabilityVersionSpecificFiling>false</cmis:capabilityVersionSpecificFiling>
+    <cmis:capabilityPWCUpdateable>false</cmis:capabilityPWCUpdateable>
+    <cmis:capabilityPWCSearchable>false</cmis:capabilityPWCSearchable>
+    <cmis:capabilityAllVersionsSearchable>false</cmis:capabilityAllVersionsSearchable>
+
+    <cmis:capabilityQuery>None</cmis:capabilityQuery>
+    <cmis:capabilityFullText>None</cmis:capabilityFullText>
+    <cmis:capabilityJoin>NoJoin</cmis:capabilityJoin>
+   </cmis:capabilities>
+   <cmis:cmisVersionsSupported>0.61c</cmis:cmisVersionsSupported>
+   <cmis:repositorySpecificInformation>
+   </cmis:repositorySpecificInformation>
+
+   </cmis:repositoryInfo>
+    <collection href="http://kt.localhost/webservice/atompub/cmis/?dms/folder/Root%20Folder/children/" cmis:collectionType="rootchildren">
+     <atom:title>Root Folder Children Collection</atom:title>
+    </collection>
+    <collection href="http://kt.localhost/webservice/atompub/cmis/?dms/folder/Root%20Folder/descendants/" cmis:collectionType="rootdescendants">
+     <atom:title>Root Folder Children Collection</atom:title>
+    </collection>
+    <collection href="http://kt.localhost/webservice/atompub/cmis/?dms/checkedout/" cmis:collectionType="checkedout">
+
+     <atom:title>Checked Out Document Collection</atom:title>
+     <accept>application/atom+xml;type=entry</accept>
+    </collection>
+    <collection href="http://kt.localhost/webservice/atompub/cmis/?dms/types/" cmis:collectionType="typeschildren">
+     <atom:title>Object Type Collection</atom:title>
+    </collection>
+    <collection href="http://kt.localhost/webservice/atompub/cmis/?dms/types/" cmis:collectionType="typesdescendants">
+
+     <atom:title>Object Type Collection</atom:title>
+    </collection>
+   </workspace>
+  </service>

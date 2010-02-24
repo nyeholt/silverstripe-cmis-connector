@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF8'?>
+<service xmlns="http://www.w3.org/2007/app" xmlns:cmis="http://docs.oasis-open.org/ns/cmis/core/200901"
+	xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901">
+	<workspace>
+		<title xmlns="http://www.w3.org/2005/Atom" type="text">default</title>
+		<cmisra:repositoryInfo>
+			<cmis:repositoryId>default</cmis:repositoryId>
+			<cmis:repositoryName>default</cmis:repositoryName>
+			<cmis:repositoryRelationship>self</cmis:repositoryRelationship>
+			<cmis:repositoryDescription>Repository default
+			</cmis:repositoryDescription>
+			<cmis:vendorName>Nuxeo</cmis:vendorName>
+			<cmis:productName>Nuxeo Repository</cmis:productName>
+			<cmis:productVersion>5.2-SNAPSHOT</cmis:productVersion>
+			<cmis:rootFolderId>0da750e8-4235-46ec-aafc-7787f866f2bd
+			</cmis:rootFolderId>
+			<cmis:latestChangeToken></cmis:latestChangeToken>
+			<cmis:capabilities>
+				<cmis:capabilityACL>none</cmis:capabilityACL>
+				<cmis:capabilityAllVersionsSearchable>true
+				</cmis:capabilityAllVersionsSearchable>
+				<cmis:capabilityChanges>innerandouter</cmis:capabilityChanges>
+				<cmis:capabilityChangesOnType>cmis:folder
+				</cmis:capabilityChangesOnType>
+				<cmis:capabilityChangesOnType>cmis:policy
+				</cmis:capabilityChangesOnType>
+				<cmis:capabilityChangesOnType>cmis:relationship
+				</cmis:capabilityChangesOnType>
+				<cmis:capabilityChangesOnType>cmis:document
+				</cmis:capabilityChangesOnType>
+				<cmis:capabilityContentStreamUpdatability>anytime
+				</cmis:capabilityContentStreamUpdatability>
+				<cmis:capabilityGetDescendants>false</cmis:capabilityGetDescendants>
+				<cmis:capabilityMultifiling>false</cmis:capabilityMultifiling>
+				<cmis:capabilityPWCSearchable>true</cmis:capabilityPWCSearchable>
+				<cmis:capabilityPWCUpdateable>true</cmis:capabilityPWCUpdateable>
+				<cmis:capabilityQuery>bothcombined</cmis:capabilityQuery>
+				<cmis:capabilityRenditions>none</cmis:capabilityRenditions>
+				<cmis:capabilityUnfiling>false</cmis:capabilityUnfiling>
+				<cmis:capabilityVersionSpecificFiling>false
+				</cmis:capabilityVersionSpecificFiling>
+				<cmis:capabilityJoin>innerandouter</cmis:capabilityJoin>
+			</cmis:capabilities>
+			<cmis:cmisVersionSupported>0.62</cmis:cmisVersionSupported>
+			<cmis:changesIncomplete>false</cmis:changesIncomplete>
+		</cmisra:repositoryInfo>
+		<collection href="http://localhost:8080/nuxeo/site/cmis/query"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="query">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">query
+				collection</title>
+		</collection>
+		<collection href="http://localhost:8080/nuxeo/site/cmis/types"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="typesdescendants">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">Types</title>
+		</collection>
+		<collection href="http://localhost:8080/nuxeo/site/cmis/types"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="types">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">Types</title>
+		</collection>
+		<collection
+			href="http://localhost:8080/nuxeo/site/cmis/descendants/0da750e8-4235-46ec-aafc-7787f866f2bd"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="rootdescendants">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">the descendants
+			</title>
+		</collection>
+		<collection href="http://localhost:8080/nuxeo/site/cmis/checkedout"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="checkedout">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">the checkedout
+			</title>
+		</collection>
+		<collection
+			href="http://localhost:8080/nuxeo/site/cmis/children/0da750e8-4235-46ec-aafc-7787f866f2bd"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="root">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">children
+				collection</title>
+		</collection>
+		<collection href="http://localhost:8080/nuxeo/site/cmis/unfiled"
+			xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200901"
+			cmisra:collectionType="unfiled">
+			<title xmlns="http://www.w3.org/2005/Atom" type="text">the unfiled
+			</title>
+		</collection>
+		<link xmlns="http://www.w3.org/2005/Atom" type="application/cmistree+xml"
+			rel="http://docs.oasis-open.org/ns/cmis/link/200901/typesdescendants"
+			href="http://localhost:8080/nuxeo/site/cmis/typesdescendants" />
+		<cmisra:uritemplate>
+			<cmisra:type>entrybyid</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+			<cmisra:template>http://localhost:8080/nuxeo/object/{id}
+			</cmisra:template>
+		</cmisra:uritemplate>
+		<cmisra:uritemplate>
+			<cmisra:type>folderbypath</cmisra:type>
+			<cmisra:mediatype>application/atom+xml;type=entry</cmisra:mediatype>
+			<cmisra:template>http://localhost:8080/nuxeo/path{path}
+			</cmisra:template>
+		</cmisra:uritemplate>
+	</workspace>
+</service>

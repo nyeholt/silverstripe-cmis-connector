@@ -1,0 +1,37 @@
+Version 0.1.0 RC3
+
+* Updates to the way SeaMist parses information to support CMIS 1.0 Draft 4
+  in Alfresco 3.2.0 Community R2. Haven't fully genericised things yet, but
+  that will be the first thing that's done in 0.2.0... 
+
+Version 0.1.0 RC2
+2009-11-26
+
+* Refactored to use an AbstractSeaMistRepository parent class that handles
+  most of the CMIS interactions, leaving the child class to implement just the
+  login() and getObject() methods. The getObject method will be removed in a 
+  later CMIS version once the entityById bit of the standard comes into play
+* Have changed the details you must provide for the connector; now, you 
+  must provide the 'RepositoryInfoUrl' which is the URL to the getRepository
+  webscript (typically /api/repository). Optionally, you can also provide
+  the RootNodeUrl, which is the CMIS URL to the root node to restrict access
+  to. If this value is NOT set, then the RootFolderId as found in the repository
+  info feed will be used instead.  
+* Seamist framework now loads up the SeaMistRepositoryInfo object which provides
+  overall information about the CMIS server being connected to. This information
+  is used for determining the default root node 
+
+Upgrade notes:
+
+* You will need to change the connection details of any existing Alfresco 
+  connectors.  
+
+Version 0.1.0 RC1
+2009-11-16
+
+Initial release candidate of Alfresco Content Connector
+* Allows for read-only access of an Alfresco repository as a single user
+* Provides simple example templates for browsing folders and files stored in 
+Alfresco
+* Provides import functionality to import Alfresco content into natively managed
+SilverStripe files and folders. 
