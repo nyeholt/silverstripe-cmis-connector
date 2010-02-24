@@ -1,3 +1,7 @@
+Version 0.1.0 RC4
+
+* Renamed to CMIS Connector to indicate its more generic nature
+
 Version 0.1.0 RC3
 
 * Updates to the way SeaMist parses information to support CMIS 1.0 Draft 4

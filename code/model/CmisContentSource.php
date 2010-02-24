@@ -22,14 +22,14 @@ OF SUCH DAMAGE.
 */
 
 /**
- * Retrieves content from an Alfresco server
+ * Retrieves content from an Cmis server
  * 
- * Uses the Alfresco CMIS APIs to retrieve data
+ * Uses the CMIS APIs to retrieve data
  * 
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class AlfrescoContentSource extends ExternalContentSource implements ExternalContentRepositoryProvider
+class CmisContentSource extends ExternalContentSource implements ExternalContentRepositoryProvider
 {
 	public static $db = array(
 		'RepositoryType' => "Enum('Alfresco,KnowledgeTree','Alfresco')",
@@ -40,35 +40,35 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 		'Password' => 'Text',
 	);
 
-	public static $icon = array("alfresco-connector/images/alfresco/alfresco", "folder");
+	public static $icon = array("cmis-connector/images/cmis", "folder");
 
 	public function getCMSFields()
 	{
 		$fields = parent::getCMSFields();
 
-		$fields->addFieldToTab('Root.Main', new DropdownField('RepositoryType', _t('AlfrescoContentSource.REPO_TYPE', 'Repository Type'), array('Alfresco' => 'Alfresco', 'KnowledgeTree' => 'KnowledgeTree')));
+		$fields->addFieldToTab('Root.Main', new DropdownField('RepositoryType', _t('CmisContentSource.REPO_TYPE', 'Repository Type'), array('Alfresco' => 'Alfresco', 'KnowledgeTree' => 'KnowledgeTree')));
 
-		$fields->addFieldToTab('Root.Main', new TextField('RepositoryInfoUrl', _t('AlfrescoContentSource.REPO_INFO_URL', 'Repository Information URL')));
-		$fields->addFieldToTab('Root.Main', new TextField('RootNodeUrl', _t('AlfrescoContentSource.ROOT_NODE_URL', 'Root Node URL (Optional)')));
+		$fields->addFieldToTab('Root.Main', new TextField('RepositoryInfoUrl', _t('CmisContentSource.REPO_INFO_URL', 'Repository Information URL')));
+		$fields->addFieldToTab('Root.Main', new TextField('RootNodeUrl', _t('CmisContentSource.ROOT_NODE_URL', 'Root Node URL (Optional)')));
 
-		$fields->addFieldToTab('Root.Main', new TextField('Username', _t('AlfrescoContentSource.USER', 'Username')));
-		$fields->addFieldToTab('Root.Main', new PasswordField('Password', _t('AlfrescoContentSource.PASS', 'Password')));
+		$fields->addFieldToTab('Root.Main', new TextField('Username', _t('CmisContentSource.USER', 'Username')));
+		$fields->addFieldToTab('Root.Main', new PasswordField('Password', _t('CmisContentSource.PASS', 'Password')));
 
 		return $fields;
 	}
 
 	/**
-	 * Return an alfresco content importer 
+	 * Return an CMIS content importer
 	 * 
 	 * @see external-content/code/dataobjects/ExternalContentSource#getContentImporter()
 	 */
 	public function getContentImporter($target=null)
 	{
-		return new AlfrescoImporter();
+		return new CmisImporter();
 	}
 	
 	/**
-	 * Alfresco content can only be imported into 
+	 * Cmis content can only be imported into
 	 * the file tree for now. 
 	 * 
 	 * @see external-content/code/dataobjects/ExternalContentSource#allowedImportTargets()
@@ -79,10 +79,10 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 	}
 	
 	/**
-	 * Get the alfresco seamistrepository connector. 
+	 * Get the Cmis seamistrepository connector.
 	 * 
 	 * This is used by this object directly, but also 
-	 * via AlfrescoContentItems via composition
+	 * via CmisContentItems via composition
 	 * 
 	 * @return SeaMistRepository
 	 */
@@ -141,7 +141,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 			$objectId = $this->decodeId($objectId);
 			$obj = $repo->getObject($objectId);
 			if ($obj) {
-				$item = new AlfrescoContentItem($this, $obj);
+				$item = new CmisContentItem($this, $obj);
 			}
 		}
 
@@ -149,7 +149,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 	}
 
 	/**
-	 * Gets the root alfresco repository
+	 * Gets the root Cmis repository
 	 * 
 	 * @see external-content/code/model/ExternalContentSource#getRoot()
 	 */
@@ -159,7 +159,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 		if ($repo && $repo->isConnected()) {
 			try {
 				$root = $repo->getRepositoryRoot();
-				$item = new AlfrescoContentItem($this, $root);
+				$item = new CmisContentItem($this, $root);
 				return $item;
 			} catch (FailedRequestException $re) {
 				error_log("Failed getting the repository root: ".$re->getMessage());
@@ -178,7 +178,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 	public function stageChildren($showAll = false) {
 		// if we don't have an ID directly, we should load and return ALL the external content sources
 		if (!$this->ID) {
-			return DataObject::get('AlfrescoContentSource');
+			return DataObject::get('CmisContentSource');
 		}
 
 		$children = new DataObjectSet();
@@ -192,7 +192,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 	}
 	
 	/**
-	 * Alfresco ID encoding can be less aggressive 
+	 * Cmis ID encoding can be less aggressive
 	 * @see external-content/code/model/ExternalContentSource#encodeId($id)
 	 */
 	public function encodeId($id)
@@ -201,7 +201,7 @@ class AlfrescoContentSource extends ExternalContentSource implements ExternalCon
 	}
 	
 	/**
-	 * Alfresco ID encoding can be less aggressive 
+	 * Cmis ID encoding can be less aggressive
 	 */
 	public function decodeId($id)
 	{

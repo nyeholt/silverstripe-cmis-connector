@@ -1,5 +1,5 @@
 ###############################################
-Alfresco Connector Module
+Cmis Connector Module
 ###############################################
 
 Maintainer Contact
@@ -11,13 +11,13 @@ Requirements
 -----------------------------------------------
 SilverStripe 2.4.x
 External Content module
-Alfresco > 3.0 (community or enterprise)
+Alfresco > 3.0 (community or enterprise), KnowledgeTree
 
 Documentation
 -----------------------------------------------
 Ensure that you have the external-content module installed. 
 
-Place the alfresco-connector module in your SS root directory and run
+Place the cmis-connector module in your SS root directory and run
 /dev/build.
 
 See http://doc.silverstripe.org/doku.php?id=module:alfresco-connector for 
@@ -27,18 +27,15 @@ Licensing
 -----------------------------------------------
 This connector is licensed under the BSD 
 
-Alfresco community is licensed under the GPL, however no Alfresco libraries
-are used when connecting to Alfresco
 
-
-Quick Usage Overview
+Quick Usage Overview (with alfresco)
 -----------------------------------------------
 
 * Browse to http://localhost/external-content/admin and login
-* Create a new AlfrescoContentSource from the tree on the left menu. Set the 
+* Create a new CmisContentSource from the tree on the left menu. Set the
 following field values:
-** name - Alfresco Content
-** API Url - The top level URL of your alfresco instance's webscript API. Typically
+** name - Cmis Content
+** API Url - The top level URL of your Alfresco instance's webscript API. Typically
 this is something like http://localhost:8080/alfresco/api/s (there's a publically
 accessible Alfresco demo install at http://joomla.demo.alfresco.com/alfresco/s).
 ** Username - The alfresco instance's username (the public demo system is 'demo')
@@ -54,7 +51,7 @@ user of the system. Per-user access is on the TODO list.
 
 * Navigate to the "Site Content" tab
 * Create a new 'External Content Page' in your site tree
-* Change the External Content Source value to the Alfresco Content source created 
+* Change the External Content Source value to the Cmis Content source created
 earlier
 * Save and view the page on the frontend; its url should look something like
 http://path.to.silverstripe/extcon/view?ID=1 or similar
@@ -66,7 +63,7 @@ is displayed
 
 * First, make sure you have an empty folder called "Incoming" created in the 
 "Files & Images" section
-* Navigate back to the External Content section, and expand the "Alfresco Content" 
+* Navigate back to the External Content section, and expand the "Cmis Content"
 node created earlier. 
 * Navigate to a folder (eg Data Dictionary/Scripts) and click on its name, then 
 click on the Migrate tab.
@@ -79,17 +76,17 @@ the migrate is complete.
 API
 -----------------------------------------------
 
-There is no specific API available for working with content from Alfresco 
+There is no specific API available for working with content from Cmis
 as yet. 
 
 SeaMist
 
 SeaMist is an early stage PHP library for working with CMIS repositories over
 via Atom format. It is currently in its early infancy, but provides enough
-functionality for the Alfresco Connector module to work. Over time, it is hoped
+functionality for the Cmis Connector module to work. Over time, it is hoped
 that other SeaMistRepository implementations will be created that mean client
 code can simply use the SeaMist library for interacting with CMIS repositories
-(which will then mean that this Alfresco Connector instead becomes a 
+(which will then mean that this Cmis Connector instead becomes a
 CMIS connector).
 
 See the 'SeaMistRepository' interface to see where the API is currently at; 

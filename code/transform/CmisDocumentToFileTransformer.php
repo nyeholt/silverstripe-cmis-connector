@@ -28,7 +28,7 @@ OF SUCH DAMAGE.
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class AlfrescoDocumentToFileTransformer implements ExternalContentTransformer
+class CmisDocumentToFileTransformer implements ExternalContentTransformer
 {
 	public function transform($item, $parentObject, $duplicateStrategy)
 	{
@@ -87,7 +87,7 @@ class AlfrescoDocumentToFileTransformer implements ExternalContentTransformer
 
 	private function getCacheDir()
 	{
-		$path = ASSETS_PATH.'/.alfresco_cache';
+		$path = ASSETS_PATH.'/.cmis_cache';
 		if (!is_dir($path)) {
 			mkdir($path, Filesystem::$folder_create_mask);
 		}

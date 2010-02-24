@@ -1,17 +1,17 @@
 
-= Using Alfresco Content =
+= Using Cmis Content =
 
 == Connecting to the content source ==
 
 * Browse to http://localhost/external-content/admin and login
-* Create a new AlfrescoContentSource from the tree on the left menu. Set the 
+* Create a new CmisContentSource from the tree on the left menu. Set the
 following field values:
-** name - Alfresco Content
-** API Url - The top level URL of your alfresco instance's webscript API. Typically
+** name - Cmis Content
+** API Url - The top level URL of your Cmis instance's webscript API. Typically
 this is something like http://localhost:8080/alfresco/api/s (there's a publically
 accessible Alfresco demo install at http://joomla.demo.alfresco.com/alfresco/s).
-** Username - The alfresco instance's username (the public demo system is 'demo')
-** Password - The alfresco instance's password (the public demo system is 'demo')
+** Username - The Cmis instance's username (the public demo system is 'demo')
+** Password - The Cmis instance's password (the public demo system is 'demo')
 ** Root Path - Leave as blank
 * Once saved, you will need to reload the External Content page for content to 
 start coming through
@@ -23,7 +23,7 @@ user of the system. Per-user access is on the TODO list.
 
 * Navigate to the "Site Content" tab
 * Create a new 'External Content Page' in your site tree
-* Change the External Content Source value to the Alfresco Content source created 
+* Change the External Content Source value to the Cmis Content source created
 earlier
 * Save and view the page on the frontend; its url should look something like
 http://path.to.silverstripe/extcon/view?ID=1 or similar
@@ -35,7 +35,7 @@ is displayed
 
 * First, make sure you have an empty folder called "Incoming" created in the 
 "Files & Images" section
-* Navigate back to the External Content section, and expand the "Alfresco Content" 
+* Navigate back to the External Content section, and expand the "Cmis Content"
 node created earlier. 
 * Navigate to a folder (eg Data Dictionary/Scripts) and click on its name, then 
 click on the Migrate tab.

@@ -21,7 +21,6 @@ OF SUCH DAMAGE.
  
 */
  
-
 /**
  * An Abstract CMIS repository. 
  * 

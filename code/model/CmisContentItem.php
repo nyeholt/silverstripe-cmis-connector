@@ -21,14 +21,16 @@ OF SUCH DAMAGE.
 */
 
 /**
- * AlfrescoContentItem that uses the Alfresco SeaMist 
+ * CmisContentItem that uses the SeaMist
  * connector to be retrieve information about this object
  * 
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class AlfrescoContentItem extends ExternalContentItem
+class CmisContentItem extends ExternalContentItem
 {
+	public static $icon = array("cmis-connector/images/cmis-item", "folder");
+
 	/**
 	 * The cmis object wrapper
 	 * 
@@ -89,7 +91,7 @@ class AlfrescoContentItem extends ExternalContentItem
 
 
 	/**
-	 * Overridden to load all children from Alfresco instead of this node
+	 * Overridden to load all children from Cmis instead of this node
 	 * directly
 	 * 
 	 * @param boolean $showAll
@@ -97,21 +99,21 @@ class AlfrescoContentItem extends ExternalContentItem
 	 */
 	public function stageChildren($showAll = false) {
 		if (!$this->ID) {
-			return DataObject::get('AlfrescoContentSource');
+			return DataObject::get('CmisContentSource');
 		}
 
 		$repo = $this->source->getRemoteRepository();
 		$children = new DataObjectSet();
 		if ($repo->isConnected()) {
-			if(isset($_GET['debug_profile'])) Profiler::mark("AlfrescoContentItem", "getChildren");
+			if(isset($_GET['debug_profile'])) Profiler::mark("CmisContentItem", "getChildren");
 			$childItems = $repo->getChildren($this->cmisObject);
 			if ($childItems) {
 				foreach ($childItems as $child) {
-					$item = new AlfrescoContentItem($this->source, $child);
+					$item = new CmisContentItem($this->source, $child);
 					$children->push($item);
 				}
 			}
-			if(isset($_GET['debug_profile'])) Profiler::unmark("AlfrescoContentItem", "getChildren");
+			if(isset($_GET['debug_profile'])) Profiler::unmark("CmisContentItem", "getChildren");
 		}
 
 		return $children;
@@ -214,7 +216,7 @@ class AlfrescoContentItem extends ExternalContentItem
 		if ($this->cmisObject) {
 			$props = $this->cmisObject->getProperties();
 			foreach ($props as $name => $value) {
-				$fields->addFieldToTab('Root.Details', new ReadonlyField($name, _t('AlfrescoContentItem.'.$name, $name), $value));
+				$fields->addFieldToTab('Root.Details', new ReadonlyField($name, _t('CmisContentItem.'.$name, $name), $value));
 			}
 		}
 

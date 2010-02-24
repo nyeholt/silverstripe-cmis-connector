@@ -20,51 +20,29 @@ STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
 OF SUCH DAMAGE.
  
 */
- 
 
 /**
- * Transform a folder asset
+ * Implements
  * 
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class AlfrescoFolderToFolderTransformer implements ExternalContentTransformer
+class CmisImporter extends ExternalContentImporter
 {
-	public function transform($item, $parentObject, $duplicateStrategy)
+	public function __construct()
 	{
-		$pageChildren = $item->stageChildren();
+		$this->contentTransforms['document'] = new CmisDocumentToFileTransformer();
+		$this->contentTransforms['folder'] = new CmisFolderToFolderTransformer();
+	}
 
-		// okay, first we'll create the new page item, 
-		// and map a bunch of child information across
-		$newFolder = new Folder();
-		
-		$parentId = $parentObject ? $parentObject->ID : 0;
-		$existing = DataObject::get_one('File', '"ParentID" = \''.Convert::raw2sql($parentId).'\' and "Name" = \''.Convert::raw2sql($item->Title).'\'');
-		if ($existing && $duplicateStrategy == ExternalContentTransformer::DS_SKIP) {
-			// just return the existing children
-			return new TransformResult($existing, $pageChildren);
-		} else if ($existing && $duplicateStrategy == ExternalContentTransformer::DS_OVERWRITE) {
-			$newFolder = $existing;
+	protected function getExternalType($item)
+	{
+		// see if it has a content url
+		if (strtolower($item->BaseType) == 'document') {
+			return 'document';
 		}
-
-		$newFolder->Name = $item->Title;
-		$newFolder->Title = $item->Title;
-		$newFolder->MenuTitle = $item->MenuTitle;
-
-		// what else should we map across?
-		// $newPage->MatrixId = $item->id;
-		// $newPage->OriginalProperties = serialize($item->getRemoteProperties());
-
-		$newFolder->ParentID = $parentObject->ID;
-		$newFolder->Sort = 0;
-		$newFolder->write();
 		
-		if(!file_exists($newFolder->getFullPath())) {
-			mkdir($newFolder->getFullPath(),Filesystem::$folder_create_mask);
-		}
-
-		return new TransformResult($newFolder, $pageChildren);
-		
+		return 'folder';
 	}
 }
 
