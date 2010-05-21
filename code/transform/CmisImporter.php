@@ -27,7 +27,7 @@ OF SUCH DAMAGE.
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class QueuedCmisImporter extends ExternalContentImporter
+class CmisImporter extends ExternalContentImporter
 {
 	public function __construct()
 	{
