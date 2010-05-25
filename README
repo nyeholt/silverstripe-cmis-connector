@@ -17,8 +17,8 @@ Documentation
 -----------------------------------------------
 Ensure that you have the external-content module installed. 
 
-Place the cmis-connector module in your SS root directory and run
-/dev/build.
+Place the cmis-connector module in your SS root directory in a folder named 
+"cmis-connector"  and run dev/build.
 
 See http://doc.silverstripe.org/doku.php?id=module:alfresco-connector for 
 getting started with the connector module
