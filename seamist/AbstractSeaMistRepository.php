@@ -1,36 +1,35 @@
 <?php
+
 /**
 
-Copyright (c) 2009, SilverStripe Australia PTY LTD - www.silverstripe.com.au
-All rights reserved.
+  Copyright (c) 2009, SilverStripe Australia PTY LTD - www.silverstripe.com.au
+  All rights reserved.
 
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
-    * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the 
-      documentation and/or other materials provided with the distribution.
-    * Neither the name of SilverStripe nor the names of its contributors may be used to endorse or promote products derived from this software 
-      without specific prior written permission.
+ * Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the 
+  documentation and/or other materials provided with the distribution.
+ * Neither the name of SilverStripe nor the names of its contributors may be used to endorse or promote products derived from this software 
+  without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE 
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE 
-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE 
-GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, 
-STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
-OF SUCH DAMAGE.
- 
-*/
- 
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE
+  GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT,
+  STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+  OF SUCH DAMAGE.
+
+ */
+
 /**
  * An Abstract CMIS repository. 
- * 
- * 
  * 
  * @author Marcus Nyeholt <marcus@silverstripe.com.au>
  *
  */
-class AbstractSeaMistRepository implements SeaMistRepository
-{
+class AbstractSeaMistRepository implements SeaMistRepository {
+
 	protected $baseUrl;
 	protected $repoUrl;
 
@@ -39,7 +38,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 */
 	protected $api;
 
-	public function __construct($api=null) {
+	public function __construct($api = null) {
 		if (!$api) {
 			$this->api = new WebApiClient('');
 		} else {
@@ -51,8 +50,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	/**
 	 * Attach the seamist object handlers
 	 */
-	protected function attachHandlers()
-	{
+	protected function attachHandlers() {
 		// Bind in the return handlers for our types
 		$this->api->addReturnHandler('cmisobject', new CMISObjectReturnHandler());
 		$this->api->addReturnHandler('cmisobjectlist', new CMISObjectListReturnHandler());
@@ -64,8 +62,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * 
 	 * @see alfresco-connector/seamist/SeaMistRepository#connect($url, $username, $password)
 	 */
-	public function connect($repoUrl, $baseUrl, $username, $password)
-	{
+	public function connect($repoUrl, $baseUrl, $username, $password) {
 		$this->repoUrl = $repoUrl;
 		$this->baseUrl = $baseUrl;
 		$this->login($username, $password);
@@ -84,7 +81,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 			}
 		} catch (Zend_Http_Client_Adapter_Exception $e) {
 			// we might not have connected yet!
-			error_log("Failed connecting to receive repository info: ".$e->getMessage());
+			error_log("Failed connecting to receive repository info: " . $e->getMessage());
 		}
 	}
 
@@ -95,8 +92,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * @param String $username
 	 * @param String $password
 	 */
-	protected function login($username, $password)
-	{
+	protected function login($username, $password) {
 		$this->api->setAuthInfo($username, $password);
 	}
 
@@ -105,8 +101,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 *
 	 * @return boolean
 	 */
-	public function isConnected()
-	{
+	public function isConnected() {
 		return $this->baseUrl != null;
 	}
 
@@ -114,8 +109,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * Disconnect from the repository.
 	 * 
 	 */
-	public function disconnect()
-	{
+	public function disconnect() {
 		$this->baseUrl = null;
 	}
 
@@ -130,11 +124,10 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * Return the CMIS information about this repository
 	 * @return SeaMistRepositoryInfo
 	 */
-	public function getRepositoryInfo()
-	{
+	public function getRepositoryInfo() {
 		if (!$this->repositoryInfo) {
 			$this->repositoryInfo = $this->api->callUrl($this->repoUrl, array(), 'cmisrepoinfo');
-		} 
+		}
 
 		return $this->repositoryInfo;
 	}
@@ -144,11 +137,19 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * 
 	 * @return SeaMistObject
 	 */
-	public function getRepositoryRoot()
-	{
+	public function getRepositoryRoot() {
 		// get the baseUrl
 		$repositoryRoot = $this->api->callUrl($this->baseUrl, array(), 'cmisobject');
 		return $repositoryRoot;
+	}
+	
+	/**
+	 * Get a direct link to the seamist object
+	 * 
+	 * @param SeaMistObject $object
+	 */
+	public function directLink(SeaMistObject $object) {
+		
 	}
 
 	/**
@@ -156,8 +157,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * 
 	 * @see external-content/seamist/SeaMistRepository#streamObject()
 	 */
-	public function streamObject(SeaMistObject $object, $toFile=null)
-	{
+	public function streamObject(SeaMistObject $object, $toFile = null) {
 		// TODO: Not implementing until local caching of content files is possible, as otherwise
 		// we need to copy file locally first, THEN forward it to the user's browser. 
 		// not going to bother with that just yet.
@@ -204,8 +204,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * @param String $url
 	 * @return String
 	 */
-	protected function modifyStreamUrl($url)
-	{
+	protected function modifyStreamUrl($url) {
 		return $url;
 	}
 
@@ -215,8 +214,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * @param SeaMistObject $object
 	 * @return SeaMistObjectList
 	 */
-	public function getChildren(SeaMistObject $object)
-	{
+	public function getChildren(SeaMistObject $object) {
 		$url = $object->getLink('children');
 		if (!$url) {
 			$url = $object->getLink('down');
@@ -242,8 +240,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * 
 	 * @return SeaMistObject
 	 */
-	public function getProperties($id)
-	{
+	public function getProperties($id) {
 		$object = $this->getObject($id);
 		if ($object) {
 			return $object;
@@ -255,8 +252,7 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * @param String $id
 	 * @return SeaMistObject
 	 */
-	public function getObject($id)
-	{
+	public function getObject($id) {
 		
 	}
 
@@ -267,15 +263,14 @@ class AbstractSeaMistRepository implements SeaMistRepository
 	 * @param String $values
 	 * @param String $uriName
 	 */
-	protected function mapToTemplate($values, $uriName)
-	{
+	protected function mapToTemplate($values, $uriName) {
 		$uritemplate = $this->getRepositoryInfo()->getUriTemplate($uriName);
 		if (!$uritemplate) {
 			return null;
 		}
 		// not using array replace because we'd need to walk the array to handle { chars anyway...
 		foreach ($values as $key => $replacement) {
-			$uritemplate = str_replace('{'.$key.'}', $replacement, $uritemplate);
+			$uritemplate = str_replace('{' . $key . '}', $replacement, $uritemplate);
 		}
 
 		//nullify all others
@@ -283,7 +278,5 @@ class AbstractSeaMistRepository implements SeaMistRepository
 
 		return $uritemplate;
 	}
+
 }
-
-
-?>
