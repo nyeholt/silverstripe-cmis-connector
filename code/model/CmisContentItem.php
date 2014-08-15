@@ -47,6 +47,10 @@ class CmisContentItem extends ExternalContentItem {
 
 		return str_replace('cmis:', '', $this->baseTypeId);
 	}
+	
+	public function getContentUrl() {
+		return $this->cmisObject->getContentUrl();
+	}
 
 	/**
 	 * Overridden to pass the content through as its downloaded (if it's not cached locally)
@@ -151,6 +155,14 @@ class CmisContentItem extends ExternalContentItem {
 					// get it from there
 					return $this->source->$prop;
 				}
+			}
+		}
+		
+		if (stripos($prop, 'date') !== false) {
+			$time = strtotime($val);
+			if ($time) {
+				// convert to a date object
+				return DBField::create_field('SS_DateTime', $val);
 			}
 		}
 
